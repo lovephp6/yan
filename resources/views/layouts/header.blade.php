@@ -124,7 +124,7 @@
             <dt><i class="Hui-iconfont">&#xe61a;</i> 投诉管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
             <dd>
                 <ul>
-                    <li><a data-href="charts-1.html" data-title="折线图" href="javascript:void(0)">投诉详情</a></li>
+                    <li><a data-href="{{ url('tousu/index') }}" data-title="投诉" href="javascript:void(0)">投诉详情</a></li>
                 </ul>
             </dd>
         </dl>
