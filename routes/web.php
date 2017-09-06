@@ -65,4 +65,3 @@ Route::get('yuyue/delete', 'YuyueController@delete');
 //系统设置
 Route::any('system/index', 'SystemController@index');
 
-
