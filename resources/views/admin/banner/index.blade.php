@@ -53,7 +53,7 @@
                 <td><input name="" type="checkbox" value=""></td>
                 <td>{{ $pic->id }}</td>
                 <td>{{ $pic->cate }}</td>
-                <td><a href="javascript:;" onClick="picture_edit('图库编辑','picture-show.html','10001')"><img width="210" class="picture-thumb" src="{{ asset($pic->url) }}"></a></td>
+                <td><a href="javascript:;" onClick="picture_edit('图库编辑','picture-show.html','10001')"><img width="160" class="picture-thumb" src="{{ asset($pic->url) }}"></a></td>
                 <td class="text-l"><a class="maincolor" href="javascript:;" onClick="picture_edit('图库编辑','picture-show.html','10001')">{{ $pic->pic_name }}</a></td>
                 <td class="text-c">{{ $pic->updated_at }}</td>
                 <td>{{ $pic->status }}</td>

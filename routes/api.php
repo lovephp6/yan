@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::any('tousu/add', 'TousuController@add');
+Route::any('yuyue/add', 'YuyueController@add');

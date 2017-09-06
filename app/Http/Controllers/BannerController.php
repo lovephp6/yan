@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Banner;
 use App\Model\Cate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BannerController extends Controller
 {
@@ -21,8 +22,10 @@ class BannerController extends Controller
             $pics = $request->except('_token');
             $file = $pics['file'];
             $ext = $file->getClientOriginalExtension();
+	    $path = $file->getRealPath();
             $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-            $path = $file->move(app_path(). '../../public/uploads', $filename);
+            //$path = $file->move(app_path(). '../../public/uploads', $filename);
+	    $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
             $dudu['url'] = 'uploads/'.$filename;
             $dudu['pic_name'] = $pics['pic_name'];
             $dudu['sort'] = $pics['sort'];
