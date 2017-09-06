@@ -17,11 +17,15 @@ class ServiceController extends Controller
     {
         if ($request->isMethod('post')) {
             $pics = $request->except('_token');
-            $file = $pics['file'];
-            $ext = $file->getClientOriginalExtension();
-            $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-            $file->move(app_path(). '../../public/uploads', $filename);
-            $dudu['pic_one'] = 'uploads/'.$filename;
+            if (array_key_exists('file', $pics)) {
+                $file = $pics['file'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['pic_one'] = 'uploads/'.$filename;
+            }
             $dudu['service_name'] = $pics['service_name'];
             $dudu['sort'] = $pics['sort'];
             $dudu['status'] = $pics['status'];
@@ -40,11 +44,15 @@ class ServiceController extends Controller
         $service = Service::find($id);
         if ($request->isMethod('post')) {
             $pics = $request->except('_token');
-            $file = $pics['file'];
-            $ext = $file->getClientOriginalExtension();
-            $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-            $file->move(app_path(). '../../public/uploads', $filename);
-            $dudu['pic_one'] = 'uploads/'.$filename;
+           if (array_key_exists('file', $pics)) {
+                $file = $pics['file'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['pic_one'] = 'uploads/'.$filename;
+            }
             $dudu['service_name'] = $pics['service_name'];
             $dudu['sort'] = $pics['sort'];
             $dudu['status'] = $pics['status'];

@@ -20,15 +20,19 @@ class DianController extends Controller
             if (array_key_exists('file', $pics)) {
                 $file = $pics['file'];
                 $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
                 $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-                $file->move(app_path(). '../../public/uploads', $filename);
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
                 $dudu['dian_pic'] = 'uploads/'.$filename;
             }
             if (array_key_exists('file2', $pics)) {
                 $file2 = $pics['file2'];
                 $ext = $file2->getClientOriginalExtension();
+                $path = $file2->getRealPath();
                 $filename2 = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-                $file2->move(app_path(). '../../public/uploads', $filename2);
+                // $file2->move(app_path(). '../../public/uploads', $filename2);
+                $bool = Storage::disk('uploads')->put($filename2, file_get_contents($path));
                 $dudu['dian_code'] = 'uploads/'.$filename2;
             }
             $dudu['dian_title'] = $pics['dian_title'];
@@ -53,15 +57,19 @@ class DianController extends Controller
             if (array_key_exists('file', $pics)) {
                 $file = $pics['file'];
                 $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
                 $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-                $file->move(app_path(). '../../public/uploads', $filename);
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
                 $dudu['dian_pic'] = 'uploads/'.$filename;
             }
             if (array_key_exists('file2', $pics)) {
                 $file2 = $pics['file2'];
                 $ext = $file2->getClientOriginalExtension();
+                $path = $file2->getRealPath();
                 $filename2 = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-                $file2->move(app_path(). '../../public/uploads', $filename2);
+                // $file2->move(app_path(). '../../public/uploads', $filename2);
+                $bool = Storage::disk('uploads')->put($filename2, file_get_contents($path));
                 $dudu['dian_code'] = 'uploads/'.$filename2;
             }
             $dudu['dian_title'] = $pics['dian_title'];

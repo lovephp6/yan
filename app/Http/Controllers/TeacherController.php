@@ -17,11 +17,15 @@ class TeacherController extends Controller
     {
         if ($request->isMethod('post')) {
             $pics = $request->except('_token');
-            $file = $pics['file'];
-            $ext = $file->getClientOriginalExtension();
-            $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-            $file->move(app_path(). '../../public/uploads', $filename);
-            $dudu['picture'] = 'uploads/'.$filename;
+            if (array_key_exists('file', $pics)) {
+                $file = $pics['file'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['picture'] = 'uploads/'.$filename;
+            }
             $dudu['name'] = $pics['name'];
             $dudu['title'] = $pics['title'];
             $dudu['sort'] = $pics['sort'];
@@ -41,11 +45,15 @@ class TeacherController extends Controller
         $teacher = Teacher::find($id);
         if ($request->isMethod('post')) {
             $pics = $request->except('_token');
-            $file = $pics['file'];
-            $ext = $file->getClientOriginalExtension();
-            $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-            $file->move(app_path(). '../../public/uploads', $filename);
-            $dudu['picture'] = 'uploads/'.$filename;
+           if (array_key_exists('file', $pics)) {
+                $file = $pics['file'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['picture'] = 'uploads/'.$filename;
+            }
             $dudu['name'] = $pics['name'];
             $dudu['title'] = $pics['title'];
             $dudu['sort'] = $pics['sort'];

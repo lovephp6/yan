@@ -20,13 +20,15 @@ class BannerController extends Controller
         $cates = Cate::all();
         if ($request->isMethod('post')){
             $pics = $request->except('_token');
-            $file = $pics['file'];
-            $ext = $file->getClientOriginalExtension();
-	    $path = $file->getRealPath();
-            $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-            //$path = $file->move(app_path(). '../../public/uploads', $filename);
-	    $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
-            $dudu['url'] = 'uploads/'.$filename;
+            if (array_key_exists('file', $pics)) {
+                $file = $pics['file'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['url'] = 'uploads/'.$filename;
+            }
             $dudu['pic_name'] = $pics['pic_name'];
             $dudu['sort'] = $pics['sort'];
             $dudu['status'] = $pics['status'];
@@ -47,11 +49,15 @@ class BannerController extends Controller
         $cate_one = Banner::find($id);
         if ($request->isMethod('post')) {
             $pics = $request->except('_token');
-            $file = $pics['file'];
-            $ext = $file->getClientOriginalExtension();
-            $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-            $file->move(app_path(). '../../public/uploads', $filename);
-            $dudu['url'] = 'uploads/'.$filename;
+            if (array_key_exists('file', $pics)) {
+                $file = $pics['file'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['url'] = 'uploads/'.$filename;
+            }
             $dudu['pic_name'] = $pics['pic_name'];
             $dudu['sort'] = $pics['sort'];
             $dudu['status'] = $pics['status'];

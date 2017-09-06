@@ -15,8 +15,10 @@ class SystemController extends Controller
             if (array_key_exists('file', $pics)) {
                 $file = $pics['file'];
                 $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
                 $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
-                $file->move(app_path(). '../../public/uploads', $filename);
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
                 $dudu['code'] = 'uploads/'.$filename;
             }
             $dudu['name'] = $pics['name'];
