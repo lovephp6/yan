@@ -133,6 +133,7 @@
             <dd>
                 <ul>
                     <li><a data-href="{{ url('system/index') }}" data-title="系统设置" href="javascript:void(0)">系统设置</a></li>
+                    <li><a data-href="{{ url('system/xiangmu') }}" data-title="服务项目设置" href="javascript:void(0)">服务项目设置</a></li>
                 </ul>
             </dd>
         </dl>

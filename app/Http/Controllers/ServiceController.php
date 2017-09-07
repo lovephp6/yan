@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -26,10 +27,38 @@ class ServiceController extends Controller
                 $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
                 $dudu['pic_one'] = 'uploads/'.$filename;
             }
+            if (array_key_exists('file1', $pics)) {
+                $file = $pics['file1'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['pic_detail_nav'] = 'uploads/'.$filename;
+            }
+            if (array_key_exists('file2', $pics)) {
+                $file = $pics['file2'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['pic_down_one'] = 'uploads/'.$filename;
+            }
+            if (array_key_exists('file3', $pics)) {
+                $file = $pics['file3'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['pic_down_two'] = 'uploads/'.$filename;
+            }
             $dudu['service_name'] = $pics['service_name'];
             $dudu['sort'] = $pics['sort'];
             $dudu['status'] = $pics['status'];
             $dudu['service_desc'] = $pics['service_desc'];
+            $dudu['service_jianjie'] = $pics['service_jianjie'];
             if (Service::create($dudu)) {
                 return redirect('service/index')->with('success', '添加成功');
             } else {
@@ -53,10 +82,38 @@ class ServiceController extends Controller
                 $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
                 $dudu['pic_one'] = 'uploads/'.$filename;
             }
+            if (array_key_exists('file1', $pics)) {
+                $file = $pics['file1'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['pic_detail_nav'] = 'uploads/'.$filename;
+            }
+            if (array_key_exists('file2', $pics)) {
+                $file = $pics['file2'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['pic_down_one'] = 'uploads/'.$filename;
+            }
+            if (array_key_exists('file3', $pics)) {
+                $file = $pics['file3'];
+                $ext = $file->getClientOriginalExtension();
+                $path = $file->getRealPath();
+                $filename = date('Y-m-d-H-i-s'). uniqid(). '.' . $ext;
+                // $file->move(app_path(). '../../public/uploads', $filename);
+                $bool = Storage::disk('uploads')->put($filename, file_get_contents($path));
+                $dudu['pic_down_two'] = 'uploads/'.$filename;
+            }
             $dudu['service_name'] = $pics['service_name'];
             $dudu['sort'] = $pics['sort'];
             $dudu['status'] = $pics['status'];
             $dudu['service_desc'] = $pics['service_desc'];
+            $dudu['service_jianjie'] = $pics['service_jianjie'];
             $res = Service::where('id', $id)->update($dudu);
             if ($res) {
                 return redirect('service/index')->with('success', '添加成功');

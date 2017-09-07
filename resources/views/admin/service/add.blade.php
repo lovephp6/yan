@@ -48,6 +48,30 @@
 				</span> </div>
         </div>
         <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">详情页banner：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+				<input class="input-text upload-url" type="text" name="url" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+				<a href="javascript:void(0);" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input type="file" multiple name="file1" class="input-file">
+				</span> </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">详情小图01：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+				<input class="input-text upload-url" type="text" name="url" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+				<a href="javascript:void(0);" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input type="file" multiple name="file2" class="input-file">
+				</span> </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">详情小图02：</label>
+            <div class="formControls col-xs-8 col-sm-9"> <span class="btn-upload form-group">
+				<input class="input-text upload-url" type="text" name="url" id="uploadfile" readonly nullmsg="请添加附件！" style="width:200px">
+				<a href="javascript:void(0);" class="btn btn-primary radius upload-btn"><i class="Hui-iconfont">&#xe642;</i> 浏览文件</a>
+				<input type="file" multiple name="file3" class="input-file">
+				</span> </div>
+        </div>
+        <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">状态：</label>
             <div class="formControls col-xs-1 col-sm-1">
                 <input type="text" class="input-text" placeholder="" name="status" value="1" >
@@ -61,10 +85,17 @@
         </div>
 
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">服务介绍：</label>
+            <label class="form-label col-xs-4 col-sm-3">服务简介：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <textarea name="service_jianjie" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" onKeyUp="$.Huitextarealength(this,800)"></textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/800</p>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">服务详情：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <textarea name="service_desc" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" onKeyUp="$.Huitextarealength(this,800)"></textarea>
-                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/800</p>
             </div>
         </div>
         <div class="row cl">

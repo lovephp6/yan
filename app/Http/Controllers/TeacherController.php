@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller
 {

@@ -42,7 +42,11 @@
                     <th width="40">ID</th>
                     <th width="50">项目名称</th>
                     <th width="100">项目图片</th>
-                    <th width="300">描述</th>
+                    <th width="100">详情banner</th>
+                    <th width="100">详情小图01</th>
+                    <th width="100">详情小图02</th>
+                    <th width="250">简介</th>
+                    <th width="250">描述</th>
                     <th width="60">状态</th>
                     <th width="60">排序</th>
                     <th width="100">操作</th>
@@ -55,7 +59,11 @@
                         <td>{{ $service->id }}</td>
                         <td class="text-l">{{ $service->service_name }}</td>
                         <td><a  href="javascript:;"><img width="60" class="product-thumb" src="{{ asset($service->pic_one) }}"></a></td>
-                        <td><span class="price">{{ $service->service_desc }}</td>
+                        <td><a  href="javascript:;"><img width="60" class="product-thumb" src="{{ asset($service->pic_detail_nav) }}"></a></td>
+                        <td><a  href="javascript:;"><img width="60" class="product-thumb" src="{{ asset($service->pic_down_one) }}"></a></td>
+                        <td><a  href="javascript:;"><img width="60" class="product-thumb" src="{{ asset($service->pic_down_two) }}"></a></td>
+                        <td><span class="price">{{ mb_substr($service->service_desc,0,60).'...' }}</td>
+                        <td><span class="price">{{ mb_substr($service->service_jianjie,0,60).'...' }}</td>
                         <td>{{ $service->status }}</td>
                         <td class="td-status">{{ $service->sort }}</td>
                         <td class="td-manage"><a style="text-decoration:none" class="ml-5"  href="{{ url('service/edit', $service->id) }}" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_del(this,'{{ url('service/delete', $service->id) }}')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>

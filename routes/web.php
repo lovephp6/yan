@@ -64,6 +64,7 @@ Route::get('yuyue/delete', 'YuyueController@delete');
 
 //系统设置
 Route::any('system/index', 'SystemController@index');
+Route::any('system/xiangmu','SystemController@xiangmu');
 
 Route::get('tousu/index', 'TousuController@index');
 Route::any('tousu/edit', 'TousuController@edit');

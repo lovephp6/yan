@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Dian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DianController extends Controller
 {

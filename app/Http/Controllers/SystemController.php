@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\System;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SystemController extends Controller
 {
@@ -38,5 +39,10 @@ class SystemController extends Controller
             }
         }
         return view('admin/system/index', compact('sysMsg'));
+    }
+
+    public function xiangmu()
+    {
+	return view('admin/system/xiangmu');
     }
 }
