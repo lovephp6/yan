@@ -21,7 +21,7 @@ Route::post('tousu/add', 'TousuController@add');
 Route::get('juyan/tousu', 'JuyanController@tousu');
 Route::get('juyan/tousuMsg', 'JuyanController@tousuMsg');
 
-Route::post('yuyue/add', 'YuyueController@add');
+Route::any('yuyue/add', 'YuyueController@add');
 
 Route::get('juyan/index', 'JuyanController@index');
 
@@ -34,3 +34,17 @@ Route::get('juyan/service', 'JuyanController@service');
 Route::get('juyan/detail/{id}', 'JuyanController@detail');
 
 Route::get('juyan/teacher/{id}', 'JuyanController@teacher');
+
+Route::any('juyan/getMoney', 'JuyanController@getMoney');
+
+// 预约成功
+Route::any('juyan/yuyue/{id}', 'JuyanController@yuyue');
+
+// 获取时间接口
+Route::post('juyan/getTime', 'JuyanController@getTime');
+
+// 获取openid
+Route::any('juyan/getOpenid', 'JuyanController@getOpenid');
+
+// 支付
+Route::any('juyan/getpayid', 'JuyanController@getpayid');

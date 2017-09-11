@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\System;
+use App\Model\Xiangmu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -43,6 +44,49 @@ class SystemController extends Controller
 
     public function xiangmu()
     {
-	return view('admin/system/xiangmu');
+        $xm = Xiangmu::all();
+	    return view('admin/system/xiangmu', compact('xm'));
+    }
+
+    public function addmu(Request $request)
+    {
+        if($request->isMethod('post')){
+            $xm = $request->input('xm');
+            if (Xiangmu::create($xm)) {
+                return redirect()->back()->with('success', '添加成功');
+            } else {
+                return redirect()->back()->with('error', '添加失败');
+            }
+        }
+        return view('admin/system/addmu');
+    }
+
+    public function editmu(Request $request, $id)
+    {
+        $cate = Xiangmu::find($id);
+        if ($request->isMethod('post')) {
+            $new_cate = $request->input('xm');
+            $res = Xiangmu::where('id', $id)->update($new_cate);
+            if ($res) {
+                return redirect()->back()->with('success', '修改成功');
+            } else {
+                return redirect()->back()->with('error', '修改失败');
+            }
+        }
+        return view('admin/system/editmu', compact('cate'));
+    }
+
+    public function deletemu($id)
+    {
+        $res = Xiangmu::where('id', $id)->delete();
+        if ($res) {
+            $data['msg'] = "删除成功";
+            $data['code'] = 200;
+            return $data;
+        } else {
+            $data['msg'] = "删除失败";
+            $data['code'] = 400;
+            return $data;
+        }
     }
 }

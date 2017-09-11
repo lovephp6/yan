@@ -37,7 +37,7 @@
     <div class="cl pd-5 bg-1 bk-gray mt-20">
 		<span class="l">
 		<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-		<a class="btn btn-primary radius" onclick="system_category_add('添加资讯','{{ url('cate/add') }}')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加栏目</a>
+		<a class="btn btn-primary radius" onclick="system_category_add('添加项目','{{ url('system/addmu') }}')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加项目</a>
 		</span>
         <span class="r">共有数据：<strong>54</strong> 条</span>
     </div>
@@ -47,22 +47,24 @@
             <tr class="text-c">
                 <th width="25"><input type="checkbox" name="" value=""></th>
                 <th width="80">ID</th>
-                <th width="80">状态</th>
-                <th>栏目名称</th>
+                <th width="120">服务名称</th>
+                <th width="120">时长</th>
+                <th width="80">金额</th>
                 <th width="100">操作</th>
             </tr>
             </thead>
             <tbody>
-/*            @foreach($cates as $cate)
+           @foreach($xm as $xms)
             <tr class="text-c">
                 <td><input type="checkbox" name="" value=""></td>
-                <td>{{ $cate->id }}</td>
-                <td>{{ $cate->status == 1 ? '显示' : '隐藏' }}</td>
-                <td class="text-l">{{ $cate->cate_name }}</td>
-                <td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('栏目编辑','{{ url('cate/edit', $cate->id) }}','1','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
-                    <a title="删除" href="javascript:;" onclick="system_category_del(this,'{{ url('cate/delete', $cate->id) }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                <td>{{ $xms->id }}</td>
+                <td>{{ $xms->fuwu }}</td>
+                <td>{{ $xms->fuwu_time }}</td>
+                <td>{{ $xms->money }}</td>
+                <td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('编辑项目','{{ url('system/editmu', $xms->id) }}','1','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                    <a title="删除" href="javascript:;" onclick="system_category_del(this,'{{ url('system/deletemu', $xms->id) }}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
             </tr>
-            @endforeach*/
+            @endforeach
             </tbody>
         </table>
     </div>

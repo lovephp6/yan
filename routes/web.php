@@ -16,12 +16,14 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('logout', 'HomeController@logout');
+
 Route::get('/welcome', function(){
     return view('welcome');
 });
 
 // 管理员
-//Route::get('user/index', 'UserController@index');
+Route::any('admin/index', 'AdminController@index');
 //Route::any('user/add', 'UserController@add');
 //Route::gany('user/edit/{id}', 'UserController@edit');
 //Route::get('user/delete/{id}', 'UserController@delete');
@@ -59,12 +61,15 @@ Route::get('dian/delete/{id}', 'DianController@delete');
 // 预约管理
 Route::get('yuyue/index', 'YuyueController@index');
 Route::get('yuyue/add', 'YuyueController@add');
-Route::get('yuyue/edit', 'YuyueController@edit');
-Route::get('yuyue/delete', 'YuyueController@delete');
+Route::get('yuyue/edit/{id}', 'YuyueController@edit');
+Route::get('yuyue/delete/{id}', 'YuyueController@delete');
 
 //系统设置
 Route::any('system/index', 'SystemController@index');
-Route::any('system/xiangmu','SystemController@xiangmu');
+Route::get('system/xiangmu','SystemController@xiangmu');
+Route::any('system/addmu','SystemController@addmu');
+Route::any('system/editmu/{id}','SystemController@editmu');
+Route::any('system/deletemu/{id}','SystemController@deletemu');
 
 Route::get('tousu/index', 'TousuController@index');
 Route::any('tousu/edit', 'TousuController@edit');
