@@ -17,7 +17,7 @@ class JuyanController extends Controller
     public function index()
     {
 	$banners = Banner::where('cate', 1)->orderBy('sort', 'desc')->limit(3)->get();
-	$jishis = Teacher::orderBy('sort', 'desc')->get();
+	$jishis = Teacher::where('status', 1)->orderBy('sort', 'desc')->get();
 	$index['banner'] = $banners;
 	$index['jishis'] = $jishis;
 	return json_encode($index);
@@ -120,8 +120,8 @@ class JuyanController extends Controller
 	
     public function getOpenid(Request $request)
     {	
-	$appid = 'wx42ebc045708536b2';
-	$secret = '126a09167538b9675ec93dd45227ea8c';
+	$appid = 'wx738e2a1369b847c9';
+	$secret = '55e57fa80cb02545f1b8beea38f627a6';
 	$code = $request->input('code');
 	    $curl = curl_init();
 	    $url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.$appid.'&secret='.$secret.'&js_code='.$code.'&grant_type=authorization_code';
@@ -136,10 +136,34 @@ class JuyanController extends Controller
 
     public function getpayid(Request $request)
     {
-	$bookingNo = $request->input('bookingNo');
-	$total_fee = $request->input('total_fee');
+	$total_fee = $request->input('total_fee'); //钱数
 	$openid = $request->input('openid');
-	$body = '费用说明';
-        $url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+//	return $openid;
+	$appid= 'wx738e2a1369b847c9';
+	$mch_id = '1488891462';  //商户号
+	$key = 'qwertyuiopasdfghjklzxcvbnm123456';
+	$out_trade_no = $mch_id.time();   //单号
+	if (empty($total_fee)) {
+	    $body = "预约成功";
+	   // $total_fee = floatval(1*100);
+	} else {
+	    $body = "预约成功";
+	   // $total_fee = floatval($total_fee*100);
+	}
+	
+	$weixinpay = new \WeixinPay($appid, $openid, $mch_id, $key, $out_trade_no, $body, $total_fee);
+	$return = $weixinpay->pay();
+	return json_encode($return);
+    }
+
+    public function getMsg()
+    {
+	$return['return_code'] = 'SUCCESS';
+	$return['return_msg'] = 'OK';
+	$xml_post = '<xml>
+		<return_code>'.$return['return_code'].'</return_code>
+		<return_msg>'.$return['return_msg'].'</return_code>
+	</xml>';
+	echo $xml_post;exit;
     }
 }

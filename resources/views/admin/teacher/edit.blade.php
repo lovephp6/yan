@@ -57,8 +57,8 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">状态：</label>
             <div class="formControls col-xs-1 col-sm-1">
-                <input type="text" class="input-text" placeholder="" name="status" value="{{ $teacher->status }}">
-            </div>
+                <input type="text" class="input-text" placeholder="" name="status" value="{{ $teacher->status }}"> 
+            </div> <span style="color:#999;font-size:12px;">1为前台显示,其他数字为隐藏</span>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">排序：</label>

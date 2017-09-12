@@ -47,7 +47,7 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">确认密码：</label>
             <div class="formControls col-xs-3 col-sm-3">
-                <input type="password" class="input-text" value="{{ empty($sysMsg->tel) ? '' : $sysMsg->tel }}" placeholder="" id="renew_password" name="tel">
+                <input type="password" class="input-text" value="{{ empty($sysMsg->tel) ? '' : $sysMsg->tel }}" placeholder="" id="renew_password" name="renew_password">
             </div>
         </div>
 

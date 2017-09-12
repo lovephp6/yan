@@ -16,7 +16,8 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database",
+	    "app/Tools/WeixinPay.php"
         ],
         "psr-4": {
             "App\\": "app/"

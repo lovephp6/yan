@@ -48,3 +48,5 @@ Route::any('juyan/getOpenid', 'JuyanController@getOpenid');
 
 // 支付
 Route::any('juyan/getpayid', 'JuyanController@getpayid');
+
+Route::any('juyan/getMsg', 'JuyanController@getMsg');
