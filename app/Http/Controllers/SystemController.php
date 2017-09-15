@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\System;
 use App\Model\Xiangmu;
 use Illuminate\Http\Request;
+use App\Model\Teacher;
 use Illuminate\Support\Facades\Storage;
 
 class SystemController extends Controller
@@ -50,30 +51,62 @@ class SystemController extends Controller
 
     public function addmu(Request $request)
     {
+		$teachers = Teacher::all();
         if($request->isMethod('post')){
+			$this->validate($request, [
+			    'xm.fuwu'    => 'required',
+				'xm.fuwu_time' => 'required',
+				'xm.money' => 'required',
+				], [
+					'required'   => ':attribute 不能为空',
+				], [
+					'xm.fuwu' => '服务名称',	
+					'xm.fuwu_time' => '服务时长',	
+					'xm.money' => '金额',	
+				]);     
             $xm = $request->input('xm');
+			$teacher = $request->input('teacher');
+			if ($teacher) {
+				$xm['teacher'] = implode(',', $teacher);
+			}
             if (Xiangmu::create($xm)) {
-                return redirect()->back()->with('success', '添加成功');
+                return redirect('system/xiangmu')->with('success', '添加成功');
             } else {
                 return redirect()->back()->with('error', '添加失败');
             }
         }
-        return view('admin/system/addmu');
+        return view('admin/system/addmu', compact('teachers'));
     }
 
     public function editmu(Request $request, $id)
     {
+		$teachers = Teacher::all();
         $cate = Xiangmu::find($id);
         if ($request->isMethod('post')) {
+			$this->validate($request, [
+			    'xm.fuwu'    => 'required',
+				'xm.fuwu_time' => 'required',
+				'xm.money' => 'required',
+				], [
+					'required'   => ':attribute 不能为空',
+				], [
+					'xm.fuwu' => '服务名称',	
+					'xm.fuwu_time' => '服务时长',	
+					'xm.money' => '金额',	
+				]);     
             $new_cate = $request->input('xm');
+			$teacher = $request->input('teacher');
+			if ($teacher) {
+				$new_cate['teacher'] = implode(',', $teacher);
+			}
             $res = Xiangmu::where('id', $id)->update($new_cate);
             if ($res) {
-                return redirect()->back()->with('success', '修改成功');
+                return redirect('system/xiangmu')->with('success', '修改成功');
             } else {
                 return redirect()->back()->with('error', '修改失败');
             }
         }
-        return view('admin/system/editmu', compact('cate'));
+        return view('admin/system/editmu', compact('cate','teachers'));
     }
 
     public function deletemu($id)

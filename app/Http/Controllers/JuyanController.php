@@ -76,13 +76,15 @@ class JuyanController extends Controller
     public function teacher($id)
     {
 	$teach = Teacher::find($id);
-	$fu = \DB::table('xiangmus')->pluck('fuwu');
+	$fu = \DB::table('xiangmus')->orderBy('created_at', 'desc')->pluck('fuwu');
 	$jishis = \DB::table('teachers')->pluck('name');
 	$dianpus = \DB::table('dians')->pluck('dian_title');
+	$fu_money = \DB::table('xiangmus')->orderBy('created_at', 'desc')->first()->money;
 	$teacher['jishis'] = $jishis;
 	$teacher['dianpus'] = $dianpus;
 	$teacher['teacher'] = $teach;
 	$teacher['fuwu'] = $fu;
+	$teacher['money'] = $fu_money;
 	return json_encode($teacher);
     }
 	
@@ -90,8 +92,18 @@ class JuyanController extends Controller
     {
 	if ($request->isMethod('post')){
 	    $fuwu = $request->input('fuwu');
+		$city = $request->input('city');
 	    $mon = Xiangmu::where('fuwu', $fuwu)->first()->money;
+		$teachers = Xiangmu::where('fuwu', $fuwu)->first()->teacher;
+		$teacher1 = \DB::table('teachers')->where('city', $city)->pluck('name');
+		$teach = explode(',', $teachers);
+		$aa = $teacher1->toArray();
+		$res = array_intersect($teach, $aa);
+		if (empty($res)){
+			$res = ['暂无技师'];
+		}
 	    $money['money'] = $mon;
+		$money['teachers'] = $res;
 	    return json_encode($money);
 	}
     }
@@ -138,7 +150,6 @@ class JuyanController extends Controller
     {
 	$total_fee = $request->input('total_fee'); //钱数
 	$openid = $request->input('openid');
-//	return $openid;
 	$appid= 'wx738e2a1369b847c9';
 	$mch_id = '1488891462';  //商户号
 	$key = 'qwertyuiopasdfghjklzxcvbnm123456';
@@ -166,4 +177,92 @@ class JuyanController extends Controller
 	</xml>';
 	echo $xml_post;exit;
     }
+    
+    public function order(Request $request)
+    {
+	$openid = $request->input('openid');
+	$order = \DB::table('yuyues')->where('openid', $openid)->get();
+	$ordermsg['msg'] = $order;
+	return json_encode($ordermsg);
+    }
+    
+    public function yanzheng(Request $request)
+    {
+		if($request->isMethod('post')){
+            $yuyue['tid'] = $request->input('tid');
+            $yuyue['sid'] = $request->input('sid');
+            $yuyue['city'] = $request->input('city');
+            $yuyue['date'] = $request->input('date');
+            $yuyue['time'] = $request->input('time');
+            $yuyue['name'] = $request->input('name');
+            $yuyue['address'] = $request->input('address')+1;  // 预约人数      
+            $yuyue['other'] = $request->input('other');
+            $yuyue['tel'] = $request->input('tel');
+            $yuyue['status'] = $request->input('status');
+            $yuyue['money'] = $request->input('money');
+            $yuyue['openid'] = $request->input('openid');
+            $time = Xiangmu::where('fuwu', $yuyue['sid'])->first()->fuwu_time;
+            $yuyue_time = strtotime($yuyue['date']. ' '. $yuyue['time'].':00');
+            $total_time = ($yuyue_time) + $time*60;  //总共时间
+            $yumsg = Yuyue::where('tid', $yuyue['tid'])->orderBy('created_at', 'desc')->first();
+			if (is_null($yumsg))
+			{
+				$data['message'] = "可以预约";
+               	$data['code'] = 200;
+               	return $data;
+			}
+		  	$ready_time = strtotime($yumsg->date. ' '.$yumsg->time);
+           	$over_time = $ready_time + $time*60;
+           	$qian_time = $ready_time - $time*60;
+//			dd(date('Y-m-d H:i:s', $ready_time));
+	   		if($yumsg && ($yuyue_time>=$qian_time && $yuyue_time<=$over_time)){
+				$data['message'] = '以被预约,请换人或时间';
+               	$data['code'] = 400;
+               	return json_encode($data);
+	   	 	} else{
+				$data['message'] = "可以预约";
+               	$data['code'] = 200;
+               	return $data;
+           	}
+			
+		}
+    }
+
+	public function getTeachers(Request $request)
+	{
+		$jishi = $request->input('name');
+		$jsMsg = Teacher::where('name', $jishi)->first();
+		return json_encode($jsMsg);
+	}
+
+	public function getfuwu(Request $request)
+	{
+		$city = $request->input('city');
+		$fuwu = Dian::where('dian_title', $city)->first()->sid;
+		$fuwus = json_encode(explode(',', $fuwu));
+		return $fuwus;
+	}
+
+	public function message()
+	{
+		$fu = \DB::table('xiangmus')->orderBy('created_at', 'desc')->pluck('fuwu');
+		$jishis = \DB::table('teachers')->pluck('name');
+		$dianpus = \DB::table('dians')->pluck('dian_title');
+		$fu_money = \DB::table('xiangmus')->orderBy('created_at', 'desc')->first()->money;
+		$teacher['jishis'] = $jishis;
+		$teacher['dianpus'] = $dianpus;
+		$teacher['fuwu'] = $fu;
+		$teacher['money'] = $fu_money;
+		return json_encode($teacher);
+	}
+
+	public function tmsg(Request $request){
+		$city = $request->input('city');
+		$teacher = \DB::table('teachers')->where('city', $city)->pluck('name');
+		$teachers = $teacher->toArray();
+		if(empty($teachers)) {
+			$teachers = ['此店铺暂无技师'];
+		}
+		return json_encode($teachers);
+	}
 }

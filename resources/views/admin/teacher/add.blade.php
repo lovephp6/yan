@@ -32,11 +32,35 @@
 <article class="page-container">
     <form action="" method="post" class="form form-horizontal" enctype="multipart/form-data">
         {{ csrf_field() }}
+		@if(count($errors)>0)  
+		   @foreach($errors->all() as $value)  
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"></label>
+            <div class="formControls col-xs-5 col-sm-5" style="color: red">
+			  {{$value}}  
+            </div>
+        </div>
+		   @endforeach  
+		@endif 
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">姓名：</label>
             <div class="formControls col-xs-3 col-sm-3">
                 <input type="text" class="input-text" value="" placeholder="" id="username" name="name">
             </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">上班时间：</label>
+            <div class="formControls col-xs-3 col-sm-3">
+                <input type="text" class="input-text" value="06:00" placeholder="填写时间(格式20:00)" id="s_work" name="s_work">
+         </div>
+		<span style="color:red;font-size: 12px;">此处填写时间格式(20:00)</span>
+        </div> 
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">下班时间：</label>
+            <div class="formControls col-xs-3 col-sm-3">
+                <input type="text" class="input-text" value="24:00" placeholder="填写时间(格式20:00)" id="x_work" name="x_work">
+            </div>
+		<span style="color:red;font-size: 12px;">此处填写时间格式(20:00)</span>
         </div>
 
         <div class="row cl">
@@ -45,6 +69,18 @@
                 <input type="text" class="input-text" value="" placeholder="" name="title">
             </div>
         </div>
+		<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-3">店铺：</label>
+				<div class="formControls col-xs-8 col-sm-9"> 
+				<span class="select-box" style="width:200px;">
+				<select class="select" name="city" size="1">
+					@foreach($citys as $city)
+					<option value="{{ $city->dian_title }}">{{ $city->dian_title }}</option>
+					@endforeach
+				</select>																											</span> 
+			</div>																												</div>
+	</div>
+		</div>
 
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">照片：</label>
@@ -68,7 +104,7 @@
         </div>
 
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">备注：</label>
+            <label class="form-label col-xs-4 col-sm-3">描述：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <textarea name="desc" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" onKeyUp="$.Huitextarealength(this,100)"></textarea>
                 <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>

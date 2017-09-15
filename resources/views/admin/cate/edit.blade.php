@@ -36,6 +36,7 @@
             </div>
             <div class="tabCon">
                 <div class="row cl">
+				@include('layouts/errors')
                     <label class="form-label col-xs-4 col-sm-3">
                         <span class="c-red">*</span>
                         分类名称：</label>

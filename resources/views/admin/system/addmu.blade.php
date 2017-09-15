@@ -35,6 +35,7 @@
                 <span>添加服务</span>
             </div>
             <div class="tabCon">
+			@include('layouts/errors')
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-3">
                         <span class="c-red">*</span>
@@ -45,6 +46,17 @@
                     <div class="col-3">
                     </div>
                 </div>
+		  	 	<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-3">技师名：</label>
+					<div class="formControls col-xs-8 col-sm-9 skin-minimal">
+						@foreach($teachers as $teacher)
+						<div class="radio-box">
+						  <input name="teacher[]" type="checkbox" id="fuwu" value="{{$teacher->name}}">
+						  <label for="sex-1">{{$teacher->name}}</label>
+						</div>
+						@endforeach
+				   </div>
+		       </div>
                 <div class="row cl">
                     <label class="form-label col-xs-4 col-sm-3">
                         <span class="c-red">*</span>

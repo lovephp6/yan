@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Dian;
+use App\Model\Xiangmu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,7 +17,19 @@ class DianController extends Controller
 
     public function add(Request $request)
     {
+		$fuwus = Xiangmu::all();
         if ($request->isMethod('post')) {
+			$this->validate($request, [
+			    'dian_title'    => 'required',
+				'dian_address' => 'required',
+				'dian_tel' => 'required',
+				], [
+					'required'   => ':attribute 不能为空',
+				], [
+					'dian_title' => '服务名称',	
+					'dian_address' => '服务简介',	
+					'dian_tel' => '服务详情',	
+				]);     
             $pics = $request->except('_token');
             if (array_key_exists('file', $pics)) {
                 $file = $pics['file'];
@@ -41,19 +54,34 @@ class DianController extends Controller
             $dudu['dian_tel'] = $pics['dian_tel'];
             $dudu['sort'] = $pics['sort'];
             $dudu['status'] = $pics['status'];
+			if(isset($pics['sid'])) {
+				$dudu['sid'] = implode(',', $pics['sid']);
+			}
             if (Dian::create($dudu)) {
                 return redirect('dian/index')->with('success', '添加成功');
             } else {
                 return redirect()->back()->with('error', '添加失败');
             }
         }
-        return view('admin/dian/add');
+        return view('admin/dian/add', compact('fuwus'));
     }
 
     public function edit(Request $request, $id)
     {
         $dian = Dian::find($id);
+		$fuwus = Xiangmu::all();
         if ($request->isMethod('post')) {
+			$this->validate($request, [
+			    'dian_title'    => 'required',
+				'dian_address' => 'required',
+				'dian_tel' => 'required',
+				], [
+					'required'   => ':attribute 不能为空',
+				], [
+					'dian_title' => '服务名称',	
+					'dian_address' => '服务简介',	
+					'dian_tel' => '服务详情',	
+				]);     
             $pics = $request->except('_token');
             if (array_key_exists('file', $pics)) {
                 $file = $pics['file'];
@@ -78,6 +106,9 @@ class DianController extends Controller
             $dudu['dian_tel'] = $pics['dian_tel'];
             $dudu['sort'] = $pics['sort'];
             $dudu['status'] = $pics['status'];
+			if(isset($pics['sid'])) {
+				$dudu['sid'] = implode(',', $pics['sid']);
+			}
             $res = Dian::where('id', $id)->update($dudu);
             if ($res) {
                 return redirect('dian/index')->with('success', '修改成功');
@@ -85,7 +116,7 @@ class DianController extends Controller
                 return redirect()->back()->with('error', '修改失败');
             }
         }
-        return view('admin/dian/edit', compact('dian'));
+        return view('admin/dian/edit', compact('dian', 'fuwus'));
     }
 
     public function delete(Request $request, $id)

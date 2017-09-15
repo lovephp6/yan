@@ -32,6 +32,7 @@
 <article class="page-container">
     <form action="" method="post" class="form form-horizontal" enctype="multipart/form-data">
         {{ csrf_field() }}
+		@include('layouts/errors')
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">项目名称：</label>
             <div class="formControls col-xs-3 col-sm-3">

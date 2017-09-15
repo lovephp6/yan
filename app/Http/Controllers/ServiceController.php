@@ -17,6 +17,17 @@ class ServiceController extends Controller
     public function add(Request $request)
     {
         if ($request->isMethod('post')) {
+			$this->validate($request, [
+			    'service_name'    => 'required',
+				'service_jianjie' => 'required',
+				'service_desc' => 'required',
+				], [
+					'required'   => ':attribute 不能为空',
+				], [
+					'service_name' => '服务名称',	
+					'service_jianjie' => '服务简介',	
+					'service_desc' => '服务详情',	
+				]);     
             $pics = $request->except('_token');
             if (array_key_exists('file', $pics)) {
                 $file = $pics['file'];
@@ -72,6 +83,17 @@ class ServiceController extends Controller
     {
         $service = Service::find($id);
         if ($request->isMethod('post')) {
+			$this->validate($request, [
+			    'service_name'    => 'required',
+				'service_jianjie' => 'required',
+				'service_desc' => 'required',
+				], [
+					'required'   => ':attribute 不能为空',
+				], [
+					'service_name' => '服务名称',	
+					'service_jianjie' => '服务简介',	
+					'service_desc' => '服务详情',	
+				]);     
             $pics = $request->except('_token');
            if (array_key_exists('file', $pics)) {
                 $file = $pics['file'];

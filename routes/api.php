@@ -50,3 +50,23 @@ Route::any('juyan/getOpenid', 'JuyanController@getOpenid');
 Route::any('juyan/getpayid', 'JuyanController@getpayid');
 
 Route::any('juyan/getMsg', 'JuyanController@getMsg');
+
+Route::get('juyan/order', 'JuyanController@order');
+//验证技师是否被预约
+Route::any('juyan/yanzheng', 'JuyanController@yanzheng');
+
+Route::any('juyan/getTeachers', 'JuyanController@getTeachers');
+
+Route::get('juyan/getfuwu', 'JuyanController@getfuwu');
+
+Route::get('juyan/message', 'JuyanController@message');
+
+Route::get('juyan/tmsg', 'JuyanController@tmsg');
+
+
+
+
+/* new message */
+
+
+

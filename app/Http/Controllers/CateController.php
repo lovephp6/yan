@@ -16,11 +16,18 @@ class CateController extends Controller
     public function add(Request $request)
     {
         if($request->isMethod('post')){
+			$this->validate($request, [
+			    'cate.cate_name'    => 'required',
+				], [
+					'required'   => ':attribute 不能为空',
+				], [
+					'cate.cate_name' => '分类名称',	
+				]);     
             $cates = $request->input('cate');
             if (Cate::create($cates)) {
-                return redirect()->back()->with('success', '添加成功');
+                return redirect('cate/index')->with('success', '添加成功');
             } else {
-                return redirect()->back()->with('error', '添加失败');
+                return redirect('cate/index')->back()->with('error', '添加失败');
             }
         }
         return view('admin/cate/add');
@@ -30,12 +37,19 @@ class CateController extends Controller
     {
         $cate = Cate::find($id);
         if ($request->isMethod('post')) {
+			$this->validate($request, [
+			    'cate.cate_name'    => 'required',
+				], [
+					'required'   => ':attribute 不能为空',
+				], [
+					'cate.cate_name' => '分类名称',	
+				]);     
             $new_cate = $request->input('cate');
             $res = Cate::where('id', $id)->update($new_cate);
             if ($res) {
-                return redirect()->back()->with('success', '修改成功');
+                return redirect('cate/index')->with('success', '修改成功');
             } else {
-                return redirect()->back()->with('error', '修改失败');
+                return redirect('cate/index')->with('error', '修改失败');
             }
         }
         return view('admin/cate/edit', compact('cate'));

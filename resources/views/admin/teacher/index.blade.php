@@ -43,9 +43,11 @@
                     <th width="50">姓名</th>
                     <th width="100">照片</th>
                     <th width="100">地区</th>
+                    <th width="100">所属店铺</th>
+                    <th width="60">上班时间</th>
+                    <th width="60">下班时间</th>
                     <th width="300">描述</th>
                     <th width="60">状态</th>
-                    <th width="60">排序</th>
                     <th width="100">操作</th>
                 </tr>
                 </thead>
@@ -57,9 +59,11 @@
                     <td class="text-l">{{ $teacher->name }}</td>
                     <td><a  href="javascript:;"><img width="60" class="product-thumb" src="{{ asset($teacher->picture) }}"></a></td>
                     <td class="text-l">{{ $teacher->title }}</td>
+                    <td class="text-l">{{ $teacher->city }}</td>
+                    <td class="text-l">{{ $teacher->s_work }}</td>
+                    <td class="text-l">{{ $teacher->x_work }}</td>
                     <td><span class="price">{{ $teacher->desc }}</td>
                     <td>{{ $teacher->status }}</td>
-                    <td class="td-status">{{ $teacher->sort }}</td>
                     <td class="td-manage"><a style="text-decoration:none" class="ml-5"  href="{{ url('teacher/edit', $teacher->id) }}" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_del(this,'{{ url('teacher/delete', $teacher->id) }}')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
                 </tr>
                 @endforeach

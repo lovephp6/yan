@@ -58,7 +58,10 @@
                         <td>{{ $tousu->tel }}</td>
                         <td>{{ $tousu->desc }}</td>
                         <td class="td-status">{{ $tousu->status }}</td>
-                        <td class="td-manage"><a style="text-decoration:none" class="ml-5"  href="{{ url('tousu/edit', $tousu->id) }}" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="product_del(this,'{{ url('tousu/delete', $tousu->id) }}')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                        <td class="td-manage">
+						<!--<a style="text-decoration:none" class="ml-5"  href="{{ url('tousu/edit', $tousu->id) }}" title="编辑">
+							<i class="Hui-iconfont">&#xe6df;</i></a>-->
+							<a style="text-decoration:none" class="ml-5" onClick="product_del(this,'{{ url('tousu/delete', $tousu->id) }}')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
                     </tr>
                 @endforeach
                 </tbody>

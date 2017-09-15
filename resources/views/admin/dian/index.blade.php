@@ -42,6 +42,7 @@
                     <th width="40">ID</th>
                     <th width="150">店铺名称</th>
                     <th width="100">店铺照片</th>
+                    <th width="300">服务项目</th>
                     <th width="200">店铺地址</th>
                     <th width="100">店铺电话</th>
                     <th width="100">店铺二维码</th>
@@ -57,6 +58,7 @@
                         <td>{{ $dian->id }}</td>
                         <td class="text-l">{{ $dian->dian_title }}</td>
                         <td><a  href="javascript:;"><img width="60" class="product-thumb" src="{{ asset($dian->dian_pic) }}"></a></td>
+                        <td class="text-l">{{ $dian->sid }}</td>
                         <td class="text-l">{{ $dian->dian_address }}</td>
                         <td><span class="price">{{ $dian->dian_tel }}</td>
                         <td><a  href="javascript:;"><img width="60" class="product-thumb" src="{{ asset($dian->dian_code) }}"></a></td>

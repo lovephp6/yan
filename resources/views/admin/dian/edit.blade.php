@@ -32,6 +32,7 @@
 <article class="page-container">
     <form action="" method="post" class="form form-horizontal" enctype="multipart/form-data">
         {{ csrf_field() }}
+		@include('layouts/errors')
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">店铺名称：</label>
             <div class="formControls col-xs-3 col-sm-3">
@@ -47,6 +48,17 @@
 				<input type="file" multiple name="file" class="input-file" value="{{ $dian->dian_pic }}">
 				</span> </div>
         </div>
+		<div class="row cl">
+             <label class="form-label col-xs-4 col-sm-3">服务项目：</label>
+              <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                   @foreach($fuwus as $fuwu)
+                    <div class="radio-box">
+                          <input name="sid[]" type="checkbox" id="fuwu" value="{{$fuwu->fuwu}}">
+	                       <label for="sex-1">{{$fuwu->fuwu}}</label>
+	                 </div>
+	                @endforeach
+		       </div>
+		  </div>
 
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">店铺地址：</label>

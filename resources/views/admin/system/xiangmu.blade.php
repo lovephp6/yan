@@ -48,6 +48,7 @@
                 <th width="25"><input type="checkbox" name="" value=""></th>
                 <th width="80">ID</th>
                 <th width="120">服务名称</th>
+                <th width="120">技师</th>
                 <th width="120">时长</th>
                 <th width="80">金额</th>
                 <th width="100">操作</th>
@@ -59,6 +60,7 @@
                 <td><input type="checkbox" name="" value=""></td>
                 <td>{{ $xms->id }}</td>
                 <td>{{ $xms->fuwu }}</td>
+                <td>{{ $xms->teacher }}</td>
                 <td>{{ $xms->fuwu_time }}</td>
                 <td>{{ $xms->money }}</td>
                 <td class="f-14"><a title="编辑" href="javascript:;" onclick="system_category_edit('编辑项目','{{ url('system/editmu', $xms->id) }}','1','700','480')" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
